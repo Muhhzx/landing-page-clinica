@@ -1,59 +1,38 @@
-# ClinicaAurora
+# Clínica Aurora — site para clínica odontológica
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.3.
+Landing page completa para uma clínica odontológica fictícia, com painel interno de agenda. Projeto de portfólio feito em Angular 21.
 
-## Development server
+**Demo:** _(cole aqui o link do Netlify)_
+**Área da clínica (demo):** `/painel` · senha `aurora2026`
 
-To start a local development server, run:
+## O problema
 
-```bash
-ng serve
-```
+Clínicas pequenas dependem de indicação e do Instagram. Quando alguém procura "dentista perto de mim" no Google, ou recebe o link no WhatsApp, a clínica não tem um site rápido que passe confiança, mostre preços e leve a pessoa direto para a conversa de agendamento. E a recepção costuma controlar a agenda em papel ou planilha.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## A solução
 
-## Code scaffolding
+- **Página de conversão:** tratamentos com preço de referência, diferenciais, depoimentos, convênios, FAQ, mapa e horário de funcionamento.
+- **Agendamento pelo WhatsApp:** formulário com validação que já monta a mensagem com o nome e o tratamento de interesse, mais botão flutuante de WhatsApp.
+- **Painel da recepção:** agenda semanal por profissional, cadastro de consultas e mudança de status (agendado, confirmado, concluído, cancelado), salvo no navegador. Protegido por senha de demonstração.
+- **Pronto para o Google:** title e description por página, Open Graph para o preview no WhatsApp, dados estruturados `Dentist` (schema.org), sitemap e robots.
+- **LGPD e métricas:** página de política de privacidade, aceite no formulário e eventos de clique no WhatsApp prontos para o Google Analytics 4.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Tecnologias
 
-```bash
-ng generate component component-name
-```
+Angular 21 (standalone components, signals, novo control flow `@for`/`@if`, lazy loading por rota, route guard), TypeScript, SCSS, Vitest, deploy no Netlify.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Resultado
 
-```bash
-ng generate --help
-```
+- Bundle inicial de ~64 kB transferidos; cada página carrega só o seu código.
+- Pensado para celular primeiro, que é de onde vem a maioria dos pacientes.
+- Serve de base para adaptar a outros negócios locais (clínicas, salões, academias) trocando só os dados em `clinica.data.ts`.
 
-## Building
+> Dados, nomes, telefone e endereço são fictícios.
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## Rodar localmente
 
 ```bash
-ng test
+npm install
+npm start            # http://localhost:4200
+npm run build        # gera dist/clinica-aurora/browser
 ```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

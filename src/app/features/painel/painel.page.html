@@ -1,0 +1,111 @@
+<header class="topo">
+  <div>
+    <h1>Agenda da clínica</h1>
+    <p>Demonstração com dados simulados, salvos apenas neste navegador.</p>
+  </div>
+  <div class="topo-acoes">
+    <a class="sec" routerLink="/clinica">Voltar ao site</a>
+    <button class="sec" type="button" (click)="sair()">Sair</button>
+    <button class="btn" type="button" (click)="formAberto.set(!formAberto())">Novo agendamento</button>
+  </div>
+</header>
+
+<main class="conteudo">
+  @if (formAberto()) {
+    <div class="form">
+      <label>Paciente
+        <input type="text" [value]="novo().paciente" (input)="campo('paciente', $event)" placeholder="Nome completo">
+      </label>
+      <label>Tratamento
+        <select (change)="campo('tratamento', $event)">
+          @for (t of tratamentos; track t) { <option [value]="t">{{ t }}</option> }
+        </select>
+      </label>
+      <label>Profissional
+        <select (change)="campo('profissional', $event)">
+          @for (p of profissionais; track p) { <option [value]="p">{{ p }}</option> }
+        </select>
+      </label>
+      <label>Data
+        <input type="date" [value]="novo().data" (input)="campo('data', $event)">
+      </label>
+      <label>Horário
+        <select (change)="campo('hora', $event)">
+          @for (h of horas; track h) { <option [value]="h">{{ h }}</option> }
+        </select>
+      </label>
+      <button class="btn" type="button" (click)="salvar()">Salvar agendamento</button>
+    </div>
+  }
+
+  <div class="barra">
+    <div class="chips">
+      <button type="button" class="chip" [class.ativo]="filtro() === 'todos'" (click)="filtro.set('todos')">
+        Todos <b>{{ contagem()['todos'] }}</b>
+      </button>
+      @for (s of status; track s) {
+        <button type="button" class="chip" [attr.data-status]="s" [class.ativo]="filtro() === s" (click)="filtro.set(s)">
+          {{ rotulo[s] }} <b>{{ contagem()[s] }}</b>
+        </button>
+      }
+    </div>
+    <input class="busca" type="search" placeholder="Buscar paciente ou tratamento" aria-label="Buscar" (input)="busca.set($any($event.target).value)">
+    <div class="visao" role="group" aria-label="Visualização">
+      <button type="button" [class.ativo]="visao() === 'lista'" (click)="visao.set('lista')">Lista</button>
+      <button type="button" [class.ativo]="visao() === 'semana'" (click)="visao.set('semana')">Semana</button>
+    </div>
+  </div>
+
+  @if (visao() === 'lista') {
+    @if (filtrados().length) {
+      <div class="tabela">
+        <table>
+          <thead><tr><th>Data</th><th>Paciente</th><th>Tratamento</th><th>Profissional</th><th>Status</th><th></th></tr></thead>
+          <tbody>
+            @for (a of filtrados(); track a.id) {
+              <tr>
+                <td>{{ dataBr(a.data) }} · {{ a.hora }}</td>
+                <td class="forte">{{ a.paciente }}</td>
+                <td>{{ a.tratamento }}</td>
+                <td>{{ a.profissional }}</td>
+                <td><span class="selo" [attr.data-status]="a.status">{{ rotulo[a.status] }}</span></td>
+                <td class="acoes">
+                  @if (a.status === 'agendado') { <button type="button" (click)="mudar(a, 'confirmado')">Confirmar</button> }
+                  @if (a.status === 'confirmado') { <button type="button" (click)="mudar(a, 'concluido')">Concluir</button> }
+                  @if (a.status === 'agendado' || a.status === 'confirmado') {
+                    <button type="button" class="perigo" (click)="mudar(a, 'cancelado')">Cancelar</button>
+                  }
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    } @else {
+      <p class="vazio">Nenhum agendamento encontrado. Ajuste o filtro ou crie um novo agendamento.</p>
+    }
+  } @else {
+    <div class="nav-semana">
+      <button type="button" (click)="semana(-1)" aria-label="Semana anterior">‹</button>
+      <strong>{{ titulo() }}</strong>
+      <button type="button" (click)="semana(1)" aria-label="Próxima semana">›</button>
+    </div>
+    <div class="semana">
+      <div></div>
+      @for (d of dias(); track d.iso) { <div class="dia">{{ d.rotulo }}</div> }
+      @for (h of horas; track h) {
+        <div class="hora">{{ h }}</div>
+        @for (d of dias(); track d.iso) {
+          <div class="celula">
+            @for (a of mapa().get(d.iso + '|' + h) ?? []; track a.id) {
+              <div class="evento" [attr.data-status]="a.status" [title]="a.tratamento + ' · ' + a.profissional">
+                <strong>{{ a.paciente }}</strong>
+                <span>{{ a.tratamento }}</span>
+              </div>
+            }
+          </div>
+        }
+      }
+    </div>
+  }
+</main>

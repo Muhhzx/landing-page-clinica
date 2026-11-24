@@ -1,13 +1,71 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="utf-8">
-  <title>ClinicaAurora</title>
+  <title>Clínica Aurora Odontologia | Avaliação, clareamento, lentes e implantes em São Paulo</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <meta name="description" content="Clínica odontológica em São Paulo: limpeza, clareamento, lentes de contato dental, implantes e ortodontia. Avaliação sem pressa e plano de tratamento transparente. Agende pelo WhatsApp.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#12151a">
+  <link rel="canonical" href="https://clinica-aurora.exemplo.com.br/">
+  <link rel="icon" href="favicon.ico" sizes="any">
+
+  <!-- Open Graph (preview ao compartilhar no WhatsApp/Facebook) -->
+  <meta property="og:type" content="business.business">
+  <meta property="og:site_name" content="Clínica Aurora Odontologia">
+  <meta property="og:title" content="Clínica Aurora Odontologia — Seu sorriso merece cuidado de verdade">
+  <meta property="og:description" content="Odontologia estética e reabilitadora em São Paulo, com planejamento transparente e atendimento sem pressa. Agende sua avaliação.">
+  <meta property="og:image" content="https://clinica-aurora.exemplo.com.br/og-cover.jpg">
+  <meta property="og:url" content="https://clinica-aurora.exemplo.com.br/">
+  <meta property="og:locale" content="pt_BR">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Clínica Aurora Odontologia">
+  <meta name="twitter:description" content="Odontologia estética e reabilitadora em São Paulo. Avaliação sem pressa, plano claro antes de começar.">
+  <meta name="twitter:image" content="https://clinica-aurora.exemplo.com.br/og-cover.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Dados estruturados para o Google (rich results de clínica odontológica) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Dentist",
+    "name": "Clínica Aurora Odontologia",
+    "image": "https://clinica-aurora.exemplo.com.br/og-cover.jpg",
+    "telephone": "+5511900000000",
+    "priceRange": "R$180 - R$2900",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Av. Exemplo Fictícia, 123 — conj. 45",
+      "addressLocality": "São Paulo",
+      "addressRegion": "SP",
+      "postalCode": "01310-000",
+      "addressCountry": "BR"
+    },
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "19:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "08:00", "closes": "13:00" }
+    ]
+  }
+  </script>
+
+  <!--
+    Google Analytics 4 — descomente e troque "G-XXXXXXXXXX" pelo ID real antes de publicar.
+    Enquanto estiver comentado, o helper em shared/analytics.ts só loga os eventos no console.
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+  -->
 </head>
-<body>
-  <app-root></app-root>
-</body>
+<body><app-root></app-root></body>
 </html>

@@ -1,0 +1,187 @@
+<header class="topo">
+  <a class="marca" href="#inicio">Clínica Aurora</a>
+  <nav aria-label="Principal">
+    <a href="#servicos">Tratamentos</a>
+    <a href="#localizacao">Localização</a>
+    <a href="#depoimentos">Pacientes</a>
+    <a href="#faq">Dúvidas</a>
+    <a class="area" routerLink="/painel">Área da clínica</a>
+    <a class="btn pequeno" href="#agendar">Agendar</a>
+  </nav>
+</header>
+
+<main id="inicio">
+  <section class="hero">
+    <div class="hero-texto">
+      <p class="nota">★ 4,9 de 5 · 320 avaliações de pacientes</p>
+      <h1>Seu sorriso merece cuidado de verdade.</h1>
+      <p class="sub">Odontologia estética e reabilitadora em São Paulo, com planejamento transparente e atendimento sem pressa.</p>
+      <div class="acoes">
+        <a class="btn" [href]="linkAvaliacao" (click)="rastrearClique('hero')">Agendar avaliação</a>
+        <a class="link" href="#servicos">Ver tratamentos</a>
+      </div>
+    </div>
+    <div class="arte" aria-hidden="true" (mousemove)="tilt($event)" (mouseleave)="reset($event)">
+      <svg viewBox="0 0 400 400">
+        <circle cx="200" cy="200" r="190" class="anel"/>
+        <circle cx="200" cy="200" r="140" class="anel"/>
+        <circle cx="200" cy="200" r="90" class="anel"/>
+        <g transform="translate(110 90)">
+          <path class="dente" pathLength="1" d="M90 18 C64 4 28 14 22 56 C17 94 36 112 40 158 C43 190 54 208 65 199 C77 190 77 148 90 148 C103 148 103 190 115 199 C126 208 137 190 140 158 C144 112 163 94 158 56 C152 14 116 4 90 18 Z"/>
+          <path class="brilho" d="M52 40 C40 52 38 72 44 90"/>
+        </g>
+        <path class="faisca" d="M330 80 l5 14 14 5 -14 5 -5 14 -5 -14 -14 -5 14 -5z"/>
+        <path class="faisca f2" d="M70 300 l3 9 9 3 -9 3 -3 9 -3 -9 -9 -3 9 -3z"/>
+      </svg>
+      <div class="cartao">
+        <small>Próximo horário livre</small>
+        <strong>Amanhã, 9h30</strong>
+        <span>Avaliação com Dra. Helena Duarte</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="servicos" class="secao">
+    <h2>Tratamentos para cada sorriso</h2>
+    <div class="grade">
+      @for (s of servicos; track s.nome) {
+        <article class="card" [class.destaque]="s.destaque" (mousemove)="spot($event)">
+          <svg viewBox="0 0 24 24" class="icone" aria-hidden="true"><path [attr.d]="s.icone"/></svg>
+          <h3>{{ s.nome }}</h3>
+          <p>{{ s.descricao }}</p>
+          <span class="preco">a partir de {{ s.preco }}</span>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section id="diferenciais" class="secao">
+    <h2>Como cuidamos de você</h2>
+    <div class="difs">
+      @for (d of diferenciais; track d.titulo) {
+        <article><h3>{{ d.titulo }}</h3><p>{{ d.texto }}</p></article>
+      }
+    </div>
+  </section>
+
+  <section id="localizacao" class="secao">
+    <h2>Onde estamos</h2>
+    <div class="local">
+      <div class="local-info">
+        <p class="endereco">
+          {{ contato.endereco }}<br>
+          {{ contato.bairro }} · {{ contato.cidade }} · CEP {{ contato.cep }}
+        </p>
+        <ul class="horarios">
+          @for (h of contato.horarios; track h.dias) {
+            <li><span>{{ h.dias }}</span><span>{{ h.horario }}</span></li>
+          }
+        </ul>
+        <p class="telefone">
+          <a [href]="linkAvaliacao" (click)="rastrearClique('localizacao')">{{ contato.telefoneExibicao }} · WhatsApp</a>
+        </p>
+        <div class="convenios">
+          <p>Convênios aceitos</p>
+          <ul>
+            @for (c of convenios; track c) { <li>{{ c }}</li> }
+          </ul>
+        </div>
+      </div>
+      <div class="local-visual">
+        <img
+          class="foto"
+          src="images/fachada.jpg"
+          alt="Fachada e entrada da Clínica Aurora"
+          loading="lazy"
+          width="1200"
+          height="800">
+        <iframe
+          class="mapa"
+          [src]="mapaSrc"
+          title="Mapa de localização da Clínica Aurora"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <section id="depoimentos" class="secao">
+    <h2>Quem já cuidou do sorriso aqui</h2>
+    <div class="deps">
+      @for (d of depoimentos; track d.autor) {
+        <blockquote>
+          <p>{{ d.texto }}</p>
+          <footer>
+            <span class="avatar" aria-hidden="true">{{ d.iniciais }}</span>
+            {{ d.autor }}
+          </footer>
+        </blockquote>
+      }
+    </div>
+  </section>
+
+  <section id="faq" class="secao">
+    <h2>Perguntas frequentes</h2>
+    <div class="faq">
+      @for (p of faq; track p.pergunta; let i = $index) {
+        <article class="pergunta" [class.aberta]="perguntaAberta() === i">
+          <button type="button" (click)="alternarPergunta(i)" [attr.aria-expanded]="perguntaAberta() === i">
+            {{ p.pergunta }}
+            <span aria-hidden="true">{{ perguntaAberta() === i ? '−' : '+' }}</span>
+          </button>
+          @if (perguntaAberta() === i) { <p class="resposta">{{ p.resposta }}</p> }
+        </article>
+      }
+    </div>
+  </section>
+
+  <section id="agendar" class="secao">
+    <div class="painel">
+      <div>
+        <h2>Agende sua avaliação</h2>
+        <p class="sub">Preencha e continue a conversa pelo WhatsApp. Respondemos em horário comercial.</p>
+      </div>
+      <form class="form" (submit)="enviarFormulario($event)">
+        <label>Seu nome
+          <input
+            type="text"
+            autocomplete="name"
+            required
+            minlength="3"
+            [value]="nome()"
+            (input)="definirNome($any($event.target).value)"
+            (blur)="marcarNomeTocado()"
+            [attr.aria-invalid]="nomeTocado() && !nomeValido() ? true : null">
+          @if (nomeTocado() && !nomeValido()) {
+            <span class="erro">Informe seu nome completo (mínimo 3 letras).</span>
+          }
+        </label>
+        <label>Tratamento de interesse
+          <select (change)="tratamento.set($any($event.target).value)">
+            @for (s of servicos; track s.nome) { <option [value]="s.nome">{{ s.nome }}</option> }
+          </select>
+        </label>
+        <label class="consentimento">
+          <input type="checkbox" [checked]="aceitaPrivacidade()" (change)="aceitaPrivacidade.set($any($event.target).checked)">
+          <span>Li e concordo com o uso dos meus dados para contato, conforme a <a routerLink="/privacidade">política de privacidade</a>.</span>
+        </label>
+        <a
+          class="btn"
+          [class.desabilitado]="!formValido()"
+          [attr.aria-disabled]="!formValido() ? true : null"
+          [href]="linkFormulario()"
+          (click)="enviarFormulario($event)">
+          Continuar no WhatsApp
+        </a>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="rodape">
+  Clínica fictícia criada para demonstração de front-end. Valores, nomes e contatos são exemplos.<br>
+  <a routerLink="/painel">Ver o painel de agendamentos (demo, protegido por senha de demonstração)</a> · <a routerLink="/privacidade">Política de privacidade</a>
+</footer>
+<a class="zap" [href]="linkAvaliacao" aria-label="Falar no WhatsApp" (click)="rastrearClique('flutuante')">Falar no WhatsApp</a>

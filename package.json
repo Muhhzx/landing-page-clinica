@@ -2,12 +2,17 @@
   "name": "clinica-aurora",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
-  },
+  "ng": "ng",
+  "start": "ng serve",
+  "dev": "ng serve --open",
+  "dev:rede": "ng serve --host 0.0.0.0",
+  "build": "ng build",
+  "build:prod": "ng build --configuration production",
+  "watch": "ng build --watch --configuration development",
+  "test": "ng test",
+  "format": "prettier --write \"src/**/*.{ts,html,scss}\"",
+  "format:check": "prettier --check \"src/**/*.{ts,html,scss}\""
+},
   "private": true,
   "packageManager": "npm@11.9.0",
   "dependencies": {

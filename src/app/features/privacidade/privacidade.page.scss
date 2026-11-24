@@ -1,0 +1,8 @@
+:host { display: block; min-height: 100dvh; background: var(--bg); }
+.privacidade { max-width: 56rem; margin: 0 auto; padding: clamp(2rem, 6vw, 4rem) var(--space) 5rem; }
+.voltar { display: inline-block; margin-bottom: 2rem; color: var(--gold-soft); text-decoration: none; }
+.voltar:hover { color: var(--ivory); }
+h1 { font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 1.5rem; }
+h2 { font-size: 1.3rem; margin: 2rem 0 .75rem; }
+p { color: var(--muted); max-width: 70ch; }
+.aviso { padding: 1rem 1.25rem; border: 1px dashed rgba(201,164,92,.5); border-radius: 12px; color: var(--gold-soft); background: rgba(201,164,92,.08); }
