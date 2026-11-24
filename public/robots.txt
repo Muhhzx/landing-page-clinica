@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /painel
 
-Sitemap: https://clinica-aurora.exemplo.com.br/sitemap.xml
+Sitemap: https://landing-page-clinica.netlify.app/sitemap.xml

@@ -2,8 +2,8 @@
 
 Landing page completa para uma clínica odontológica fictícia, com painel interno de agenda. Projeto de portfólio feito em Angular 21.
 
-**Demo:** _(cole aqui o link do Netlify)_
-**Área da clínica (demo):** `/painel` · senha `aurora2026`
+**Demo:** [landing-page-clinica.netlify.app/clinica](https://landing-page-clinica.netlify.app/clinica)
+**Área da clínica (demo):** [/painel](https://landing-page-clinica.netlify.app/painel) · senha `aurora2026`
 
 ## O problema
 
